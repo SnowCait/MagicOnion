@@ -99,13 +99,13 @@ jobs:
             - /Users/distiller/Downloads/Unity_Packages/2018.4.5f1/Unity.pkg
       - run: sudo u3d install 2018.4.5f1 --no-download
       - run: sudo u3d install 2018.4.5f1 --packages Android
-      - run: sudo u3d run -- -batchmode --quit -nographics -logFile -createManualActivationFile -u 2018.4.5f1 || exit 0
+      - run: sudo u3d run --unity_version 2018.4.5f1 -- -projectPath ./samples/ChatApp/ChatApp.Unity -batchmode --quit -nographics -logFile -createManualActivationFile || exit 0
       - run: cat Unity_2018.4.5f1-android.alf
       - run: echo ${UNITY_LICENSE} | base64 -di  >> .circleci/Unity.ulf
-      - run: sudo u3d run -- -batchmode --quit -nographics -silent-crashes -logFile - -manualLicenseFile .circleci/Unity.ulf -u 2018.4.5f1 || exit 0
+      - run: sudo u3d run --unity_version 2018.4.5f1 -- -projectPath ./samples/ChatApp/ChatApp.Unity -batchmode --quit -nographics -silent-crashes -logFile - -manualLicenseFile .circleci/Unity.ulf || exit 0
       - run:
           name: build Android
-          command: sudo u3d run -- -batchmode --quit -nographics -silent-crashes -logFile - -projectPath . -executeMethod BatchBuild.Build -platform android -locationpath ./build/android -u 2018.4.5f1
+          command: sudo u3d run -- -batchmode --quit -nographics -silent-crashes -logFile - -projectPath . -executeMethod BatchBuild.Build -platform android -locationpath ./build/android
           working_directory: ./samples/ChatApp/ChatApp.Unity
       - store_artifacts:
           path: ./samples/ChatApp/ChatApp.Unity/android
