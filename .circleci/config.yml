@@ -99,29 +99,30 @@ jobs:
           paths:
             - /Users/distiller/Downloads/Unity_Packages/2018.3.12f1/Unity.pkg
       - run: sudo u3d install 2018.3.12f1 --no-download
-      - restore_cache:
-          keys:
-            - unity-android-2018.3.12f1
-      - run: sudo u3d install 2018.3.12f1 --packages Android --no-install
-      - save_cache:
-          key: unity-android-2018.3.12f1
-          paths:
-            - /Users/distiller/Downloads/Unity_Packages/2018.3.12f1/UnitySetup-Android-Support-for-Editor-2018.3.12f1.pkg
-      - run: sudo u3d install 2018.3.12f1 --packages Android --no-download
-      - run: /Applications/Unity_2018.3.12f1/Unity.app/Contents/MacOS/Unity -batchmode -quit -nographics -logFile -createManualActivationFile || exit 0
+      # - restore_cache:
+      #     keys:
+      #       - unity-android-2018.3.12f1
+      # - run: sudo u3d install 2018.3.12f1 --packages Android --no-install
+      # - save_cache:
+      #     key: unity-android-2018.3.12f1
+      #     paths:
+      #       - /Users/distiller/Downloads/Unity_Packages/2018.3.12f1/UnitySetup-Android-Support-for-Editor-2018.3.12f1.pkg
+      # - run: sudo u3d install 2018.3.12f1 --packages Android --no-download
+      - run: /Applications/Unity_2018.3.12f1/Unity.app/Contents/MacOS/Unity -quit -batchmode -nographics -logFile -createManualActivationFile || exit 0
+      - run: cat Unity_v2018.3.12f1.alf
       - run: echo ${UNITY_LICENSE} | base64 -D >> .circleci/Unity.ulf
-      - run: /Applications/Unity_2018.3.12f1/Unity.app/Contents/MacOS/Unity -batchmode -quit -nographics -silent-crashes -logFile -manualLicenseFile .circleci/Unity.ulf || exit 0
-      - run:
-          name: build Android
-          command: /Applications/Unity_2018.3.12f1/Unity.app/Contents/MacOS/Unity -batchmode -quit -nographics -silent-crashes -logFile -executeMethod BatchBuild.Build -platform android -locationpath ./build/android
-          working_directory: ./samples/ChatApp/ChatApp.Unity
+      - run: /Applications/Unity_2018.3.12f1/Unity.app/Contents/MacOS/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .circleci/Unity.ulf || exit 0
+      # - run:
+      #     name: build Android
+      #     command: /Applications/Unity_2018.3.12f1/Unity.app/Contents/MacOS/Unity -quit -batchmode -nographics -silent-crashes -logFile -executeMethod BatchBuild.Build -platform android -locationpath ./build/android
+      #     working_directory: ./samples/ChatApp/ChatApp.Unity
       - run: 
           name: return license
           command: /Applications/Unity_2018.3.12f1/Unity.app/Contents/MacOS/Unity -quit -batchmode -nographics -logFile -returnlicense || exit 0
           when: always
-      - store_artifacts:
-          path: ./samples/ChatApp/ChatApp.Unity/build/android
-          destination: /chatapp.android
+      # - store_artifacts:
+      #     path: ./samples/ChatApp/ChatApp.Unity/build/android
+      #     destination: /chatapp.android
 workflows:
   version: 2
   build-and-push:
