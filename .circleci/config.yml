@@ -16,6 +16,7 @@ executors:
     environment:
       LC_ALL: en_US.UTF-8
       LANG: en_US.UTF-8
+      U3D_HTTP_MAX_RETRIES: 3
 jobs:
   # create package for Unity
   build-unity:
