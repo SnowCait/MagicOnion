@@ -89,7 +89,15 @@ jobs:
     steps:
       - checkout
       - run: sudo gem install u3d
-      - run: sudo u3d install 2018.4.5f1 --packages Unity
+      - restore_cache:
+          keys:
+            - unity-2018.4.5f1
+      - run: sudo u3d install 2018.4.5f1 --no-install
+      - save_cache:
+          key: unity-2018.4.5f1
+          paths:
+            - /Users/distiller/Downloads/Unity_Packages/2018.4.5f1/Unity.pkg
+      - run: sudo u3d install 2018.4.5f1 --no-download
       - run: sudo u3d install 2018.4.5f1 --packages Android
       - run: sudo u3d run -- -batchmode --quit -nographics -logFile -createManualActivationFile -u 2018.4.5f1 || exit 0
       - run: cat Unity_2018.4.5f1-android.alf
