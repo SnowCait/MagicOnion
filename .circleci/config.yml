@@ -109,7 +109,7 @@ jobs:
       - run: sudo u3d install 2018.4.5f1 --packages Android --no-download
       - run: sudo u3d run --unity_version 2018.4.5f1 -- -projectPath ./samples/ChatApp/ChatApp.Unity -batchmode --quit -nographics -logFile /dev/stdout -createManualActivationFile || exit 0
       - run: cat Unity_v2018.4.5f1.alf
-      - run: echo ${UNITY_LICENSE} | base64 -di  >> .circleci/Unity.ulf
+      - run: echo ${UNITY_LICENSE} | base64 -Di >> .circleci/Unity.ulf
       - run: sudo u3d run --unity_version 2018.4.5f1 -- -projectPath ./samples/ChatApp/ChatApp.Unity -batchmode --quit -nographics -silent-crashes -logFile /dev/stdout -manualLicenseFile .circleci/Unity.ulf || exit 0
       - run:
           name: build Android
