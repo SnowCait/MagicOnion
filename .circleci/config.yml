@@ -91,7 +91,7 @@ jobs:
       - run: sudo gem install u3d
       - restore_cache:
           keys:
-            - unity-editor-2018.4.5f1-
+            - unity-editor-2018.4.5f1
       - run: sudo u3d install 2018.4.5f1 --no-install
       - save_cache:
           key: unity-editor-2018.4.5f1-
@@ -113,8 +113,7 @@ jobs:
       - run: sudo u3d run --unity_version 2018.4.5f1 -- -projectPath ./samples/ChatApp/ChatApp.Unity -batchmode -quit -nographics -silent-crashes -manualLicenseFile .circleci/Unity.ulf || exit 0
       - run:
           name: build Android
-          #command: sudo u3d -- -batchmode -quit -executeMethod BatchBuild.Build -platform android -locationpath ./build/android
-          command: sudo u3d
+          command: sudo u3d -- -batchmode -quit -executeMethod BatchBuild.Build -platform android -locationpath ./build/android
           working_directory: ./samples/ChatApp/ChatApp.Unity
       - run: 
           name: return license
