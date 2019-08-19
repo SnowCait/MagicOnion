@@ -93,7 +93,7 @@ jobs:
             echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
             source $BASH_ENV
             sudo gem install bundler
-            bundle install u3d
+            bundle exec gem install u3d
       - run: u3d install 2018.4.5f1 --packages Unity,Android
       - run: cat Unity_2018.4.5f1-android.alf
       - run: echo ${UNITY_LICENSE} | base64 -di  >> .circleci/Unity.ulf
