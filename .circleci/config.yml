@@ -91,10 +91,10 @@ jobs:
       - run: sudo gem install u3d
       - restore_cache:
           keys:
-            - unity-editor-2018.4.5f1
+            - unity-editor-2018.4.5f1-
       - run: sudo u3d install 2018.4.5f1 --no-install
       - save_cache:
-          key: unity-editor-2018.4.5f1
+          key: unity-editor-2018.4.5f1-
           paths:
             - /Users/distiller/Downloads/Unity_Packages/2018.4.5f1/Unity.pkg
       - run: sudo u3d install 2018.4.5f1 --no-download
