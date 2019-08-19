@@ -91,19 +91,19 @@ jobs:
       - run: sudo gem install u3d
       - restore_cache:
           keys:
-            - unity-2018.4.5f1
+            - unity-editor-2018.4.5f1
       - run: sudo u3d install 2018.4.5f1 --no-install
       - save_cache:
-          key: unity-2018.4.5f1
+          key: unity-editor-2018.4.5f1
           paths:
             - /Users/distiller/Downloads/Unity_Packages/2018.4.5f1/Unity.pkg
       - run: sudo u3d install 2018.4.5f1 --no-download
       - restore_cache:
           keys:
-            - unity-2018.4.5f1-android
+            - unity-android-2018.4.5f1
       - run: sudo u3d install 2018.4.5f1 --packages Android --no-install
       - save_cache:
-          key: unity-2018.4.5f1-android
+          key: unity-android-2018.4.5f1
           paths:
             - /Users/distiller/Downloads/Unity_Packages/2018.4.5f1/UnitySetup-Android-Support-for-Editor-2018.4.5f1.pkg
       - run: sudo u3d install 2018.4.5f1 --packages Android --no-download
