@@ -111,10 +111,7 @@ jobs:
       - run: cat Unity_v2018.4.5f1.alf
       - run: echo ${UNITY_LICENSE} | base64 -D >> .circleci/Unity.ulf
       - run: sudo u3d run --unity_version 2018.4.5f1 -- -projectPath ./samples/ChatApp/ChatApp.Unity -batchmode -quit -nographics -silent-crashes -manualLicenseFile .circleci/Unity.ulf || exit 0
-      - run:
-          name: build Android
-          command: sudo u3d -- -batchmode -quit -executeMethod BatchBuild.Build -platform android -locationpath ./build/android
-          working_directory: ./samples/ChatApp/ChatApp.Unity
+      - run: sudo u3d -- -batchmode -quit -projectPath $(pwd)/samples/ChatApp/ChatApp.Unity -executeMethod BatchBuild.Build -platform android -locationpath ./build/android
       - run: 
           name: return license
           command: sudo u3d run --unity_version 2018.4.5f1 -- -projectPath ./samples/ChatApp/ChatApp.Unity -quit -batchmode -nographics -returnlicense || exit 0
