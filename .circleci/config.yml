@@ -87,14 +87,9 @@ jobs:
     executor: macos
     steps:
       - checkout
-      - run: 
-          command: |
-            echo "ruby-2.6.3" > ~/.ruby-version
-            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
-            source $BASH_ENV
-            sudo gem install bundler
-            sudo gem install u3d
+      - run: sudo gem install u3d
       - run: sudo u3d install 2018.4.5f1 --packages Unity,Android
+      - run: sudo u3d run -- -batchmode --quit -nographics -logFile -createManualActivationFile || exit 0
       - run: cat Unity_2018.4.5f1-android.alf
       - run: echo ${UNITY_LICENSE} | base64 -di  >> .circleci/Unity.ulf
       - run: sudo u3d run -- -batchmode --quit -nographics -silent-crashes -logFile - -manualLicenseFile .circleci/Unity.ulf || exit 0
